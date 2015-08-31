@@ -16,18 +16,13 @@ public class CreateMessageActivity extends Activity {
 
     // Call onSendMessage() when the button is clicked
     public void onSendMessage(View view) {
-        // When we click the button, the following happens. 1) The activity looks in the layout to
-        // find the EditText with an id of message. 2) The text object is taken from the message
-        // view and converted to a string in a String object called messageText. 3) Create a new
-        // intent called intent that links to the ReceiveMessageActivity. 4) use the intent.putExtra()
-        // method to add the messageText to the intent in an object called "message". 5) Start the
-        // next activity by passing in the previously created intent.
-
         EditText messageView = (EditText) findViewById(R.id.message);
         String messageText = messageView.getText().toString();
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
         intent.putExtra(Intent.EXTRA_TEXT, messageText);
-        startActivity(intent);
+        String chooserTitle = getString(R.string.chooser);
+        Intent chosenIntent = Intent.createChooser(intent, chooserTitle);
+        startActivity(chosenIntent);
     }
 }
